@@ -5,18 +5,33 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $user = new User();
-        $user->setUsername('instructor');
-        $user->setEmail('instructor@gmail.com');
+        $user->setUsername('student');
+        $user->setEmail('student@gmail.com');
         $user->setGuard('1');
-        $user->setPassword('$2y$10$gKwRuu0rx2zm1wzHF.ZLIuqiyxtS6o11hVF8N8k4qtm5menTYAWm.');
+        $user->setPassword(
+            $this->hasher->hashPassword(
+                $user,
+                'unlockme123'
+            )
+        );
+        $user->setRoles(['ROLE_USER']);
 
         $manager->persist($user);
         $manager->flush();
     }
 }
+

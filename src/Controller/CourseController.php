@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Course;
 use DateTimeImmutable;
 use App\Form\CourseFormType;
@@ -27,23 +28,34 @@ class CourseController extends AbstractController
     #[Route('/course', name: 'app_course')]
     public function register(Request $request): Response
     {
-        // creating and storing in the database
+        // Create a new course
         $course = new Course();
-        $course->setCreatedAt(new DateTimeImmutable()); 
-        $course->setUpdatedAt(new DateTimeImmutable()); 
+        
+        // Create the form and handle the request
         $form = $this->createForm(CourseFormType::class, $course);
         $form->handleRequest($request);
 
-        // reading from the database
-        $courses = $this->courseRepository->findAll();
-
+        // If the form is submitted and valid, associate the course with the user and persist it
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->em->persist($course);
-            $this->em->flush();
+            // Fetch the currently logged-in user
+            $user = $this->getUser();
 
+            if ($user instanceof User) {
+                // Associate the course with the user
+                $user->addCourse($course);
+    
+                // Persist the course and user to the database
+                $this->em->persist($course);
+                $this->em->persist($user);
+                $this->em->flush();
+            } 
+    
             return $this->redirectToRoute('app_course');
         }
+
+        // Retrieve courses from the database
+        $courses = $this->courseRepository->findAll();
 
         return $this->render('course/index.html.twig', [
             'courseForm' => $form->createView(),

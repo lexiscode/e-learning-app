@@ -23,13 +23,14 @@ class CourseFormType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Enter the title for the course'],
+                'constraints' => [new NotBlank()],
             ]) 
             ->add('description')
             ->add('price', IntegerType::class, [
                 'label' => 'Course Price',
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Enter the price for the course'],
+                'constraints' => [new NotBlank()],
             ])
-            
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -49,3 +50,4 @@ class CourseFormType extends AbstractType
         ]);
     }
 }
+
