@@ -73,6 +73,14 @@ class CourseController extends AbstractController
             throw $this->createNotFoundException('Course not found');
         }
 
+        // Check if the user is the instructor of the course, if not, don't grant edit permissions.
+        $user = $this->getUser();
+        if ($course->getInstructor() !== $user) {
+            // Add a flash message and redirect to the main course page
+            $this->addFlash('danger', 'You are not authorized to edit this course.');
+            return $this->redirectToRoute('app_course');
+        }
+
         // Create the edit form and handle the request
         $form = $this->createForm(CourseFormType::class, $course);
         $form->handleRequest($request);
@@ -80,7 +88,7 @@ class CourseController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
             $this->em->flush();
-            
+
             return $this->redirectToRoute('app_course');
         }
 
@@ -94,6 +102,14 @@ class CourseController extends AbstractController
     public function delete($id): Response
     {
         $course = $this->courseRepository->find($id);
+
+        // Check if the user is the instructor of the course, if not, don't grant delete permissions.
+        $user = $this->getUser();
+        if ($course->getInstructor() !== $user) {
+            // Add a flash message and redirect to the main course page
+            $this->addFlash('danger', 'You are not authorized to delete this course.');
+            return $this->redirectToRoute('app_course');
+        }
 
         $this->em->remove($course);
         $this->em->flush();

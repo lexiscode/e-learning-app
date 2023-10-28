@@ -9,6 +9,16 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-6 offset-md-3">
+
+                {# Flash alerts displays #}
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
                 <h1 class="text-center">Create A New Course</h1>
                 {{ form_errors(courseForm) }}
                 {{ form_start(courseForm) }}
@@ -71,8 +81,14 @@
                             <td>{{ course.description }}</td>
                             <td>{{ course.price }}</td>
                             <td>
+                                {# Check if the course's instructor is the currently logged-in user #}
+                                {% if course.instructor == app.user %}
                                 <a href="{{ path('edit_course', {'id': course.id}) }}" class="btn btn-success">Update</a>
+                                {% endif %}
+
+                                {% if course.instructor == app.user %}
                                 <a href="/course/delete/{{ course.id }}" class="btn btn-danger">Delete</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
