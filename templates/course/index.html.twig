@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Course{% endblock %}
+
+{% set include_navigation_bar = true %}
+
+{% block body %}
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center">Create A New Course</h1>
+                {{ form_errors(courseForm) }}
+                {{ form_start(courseForm) }}
+
+                <div class="form-group">
+                    {{ form_row(courseForm.title)}}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(courseForm.description, {
+                        'label': 'Course Description',
+                        'attr': {
+                                'class': 'form-control', 
+                                'placeholder': 'Enter course description here...'
+                                }
+                        }) 
+                    }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(courseForm.price)}}
+                </div>
+                
+                <div class="form-check">
+                    {{ form_row(courseForm.agreeTerms, {
+                        'label': 'I agree to the terms and conditions',
+                        'attr': {'class': 'form-check-input'}
+                    }) }}
+                    
+                </div>
+               
+                <button type="submit" class="btn btn-primary btn-block mt-3">Submit</button>
+                {{ form_end(courseForm) }}
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="table-container w-50 m-auto">
+
+        <table class="table table-striped">
+            <thead style="text-align: center">
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody style="text-align: center">
+
+                {% if courses|length > 0 %}
+                    {% for course in courses %}
+                        <tr>
+                            <td>{{ course.id }}</td>
+                            <td>{{ course.title }}</td>
+                            <td>{{ course.description }}</td>
+                            <td>{{ course.price }}</td>
+                            <td>
+                                <a href="{{ path('edit_course', {'id': course.id}) }}" class="btn btn-success">Update</a>
+                                <a href="/course/delete/{{ course.id }}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <p>No courses found.</p>
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock %}
+

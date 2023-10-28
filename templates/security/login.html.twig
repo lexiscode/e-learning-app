@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% set include_navigation_bar = true %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center">Sign In</h1>
+                <form class="form-signin" method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <label for="inputEmail" class="sr-only">Your Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" 
+                        placeholder="Enter your email address" autocomplete="email" required autofocus>
+
+                    <label for="inputPassword" class="sr-only">Your Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" 
+                        placeholder="Enter your password" autocomplete="current-password" required>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                        Sign in
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

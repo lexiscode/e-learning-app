@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
+{% set include_navigation_bar = false %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="welcome-container">
+
+    <h1>Welcome to LearnLex</h1>
+    <p>Your all-in-one solution for managing tasks effectively.</p>
+    <div class="buttons">
+        <a href="{{ path('app_login') }}" class="button">Login</a>
+        <a href="{{ path('app_register') }}" class="button">Register</a>
+    </div>
+
+</div>
+
+{% endblock %}
+
