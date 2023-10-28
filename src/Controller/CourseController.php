@@ -66,15 +66,21 @@ class CourseController extends AbstractController
     #[Route('/course/edit/{id}', name: 'edit_course')]
     public function edit($id, Request $request): Response
     {
+        // Find the course by its ID
         $course = $this->courseRepository->find($id);
 
+        if (!$course){
+            throw $this->createNotFoundException('Course not found');
+        }
+
+        // Create the edit form and handle the request
         $form = $this->createForm(CourseFormType::class, $course);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
 
             $this->em->flush();
-
+            
             return $this->redirectToRoute('app_course');
         }
 
