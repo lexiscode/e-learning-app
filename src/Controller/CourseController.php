@@ -26,7 +26,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/course', name: 'app_course')]
-    public function register(Request $request): Response
+    public function createCourse(Request $request): Response
     {
         // Create a new course
         $course = new Course();
@@ -92,8 +92,7 @@ class CourseController extends AbstractController
             return $this->redirectToRoute('app_course');
         }
 
-        return $this->render('course/show.html.twig', [
-            'course' => $course,
+        return $this->render('course/edit.html.twig', [
             'courseForm' => $form->createView()
         ]);
     }

@@ -83,6 +83,10 @@
                             <td>
                                 {# Check if the course's instructor is the currently logged-in user #}
                                 {% if course.instructor == app.user %}
+                                <a href="{{ path('create_lesson', {'courseId': course.id}) }}" class="btn btn-primary">Create Lesson</a>
+                                {% endif %}
+
+                                {% if course.instructor == app.user %}
                                 <a href="{{ path('edit_course', {'id': course.id}) }}" class="btn btn-success">Update</a>
                                 {% endif %}
 

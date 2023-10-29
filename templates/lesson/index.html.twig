@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Lesson{% endblock %}
+
+{% set include_navigation_bar = true %}
+
+{% block body %}
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+                {# Flash alerts displays #}
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <h1 class="text-center">Create A New Lesson</h1>
+                {{ form_errors(lessonForm) }}
+                {{ form_start(lessonForm) }}
+
+                <div class="form-group">
+                    {{ form_row(lessonForm.title)}}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(lessonForm.content, {
+                        'label': 'Course Content',
+                        'attr': {
+                                'class': 'form-control', 
+                                'placeholder': 'Enter course content here...'
+                                }
+                        }) 
+                    }}
+                </div>
+               
+                <button type="submit" class="btn btn-primary btn-block mt-3">Submit</button>
+                
+                {{ form_end(lessonForm) }}
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="table-container w-50 m-auto">
+
+        <table class="table table-striped">
+            <thead style="text-align: center">
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody style="text-align: center">
+
+                {% if lessons|length > 0 %}
+                    {% for lesson in lessons %}
+                        <tr>
+                            <td>{{ lesson.id }}</td>
+                            <td>{{ lesson.title }}</td>
+                            <td>{{ lesson.content }}</td>
+                            <td>
+                                {# Check if the course's instructor is the currently logged-in user #}
+                                <a href="{{ path('edit_lesson', {'id': lesson.id}) }}" class="btn btn-success">Update</a>
+                                <a href="/lesson/delete/{{ lesson.id }}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <p>No lesson found.</p>
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock %}
+

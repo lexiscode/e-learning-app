@@ -42,6 +42,7 @@ class Lesson
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
         $this->progresses = new ArrayCollection();
     }
     public function getId(): ?int
