@@ -40,7 +40,7 @@ class LessonController extends AbstractController
         if ($course->getInstructor() !== $user) {
             // Add a flash message and redirect to the main course page
             $this->addFlash('danger', 'You are not authorized to create lessons for this course.');
-            return $this->redirectToRoute('app_course');
+            return $this->redirectToRoute('create_course');
         }
 
         // Create a new course

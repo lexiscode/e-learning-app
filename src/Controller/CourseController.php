@@ -25,7 +25,7 @@ class CourseController extends AbstractController
         $this->courseRepository = $em->getRepository(Course::class);
     }
 
-    #[Route('/course', name: 'app_course')]
+    #[Route('/course', name: 'create_course')]
     public function createCourse(Request $request): Response
     {
         // Create a new course
@@ -51,7 +51,7 @@ class CourseController extends AbstractController
                 $this->em->flush();
             } 
     
-            return $this->redirectToRoute('app_course');
+            return $this->redirectToRoute('create_course');
         }
 
         // Retrieve courses from the database
@@ -78,7 +78,7 @@ class CourseController extends AbstractController
         if ($course->getInstructor() !== $user) {
             // Add a flash message and redirect to the main course page
             $this->addFlash('danger', 'You are not authorized to edit this course.');
-            return $this->redirectToRoute('app_course');
+            return $this->redirectToRoute('create_course');
         }
 
         // Create the edit form and handle the request
@@ -89,7 +89,7 @@ class CourseController extends AbstractController
 
             $this->em->flush();
 
-            return $this->redirectToRoute('app_course');
+            return $this->redirectToRoute('create_course');
         }
 
         return $this->render('course/edit.html.twig', [
@@ -107,13 +107,13 @@ class CourseController extends AbstractController
         if ($course->getInstructor() !== $user) {
             // Add a flash message and redirect to the main course page
             $this->addFlash('danger', 'You are not authorized to delete this course.');
-            return $this->redirectToRoute('app_course');
+            return $this->redirectToRoute('create_course');
         }
 
         $this->em->remove($course);
         $this->em->flush();
 
-        return $this->redirectToRoute('app_course');
+        return $this->redirectToRoute('create_course');
     }
 }
 

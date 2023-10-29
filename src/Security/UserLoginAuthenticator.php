@@ -49,7 +49,7 @@ class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // redirects to this route after successful auth
-        return new RedirectResponse($this->urlGenerator->generate('app_course'));
+        return new RedirectResponse($this->urlGenerator->generate('create_course'));
     }
 
     protected function getLoginUrl(Request $request): string
