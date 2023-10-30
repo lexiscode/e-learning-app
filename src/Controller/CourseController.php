@@ -28,6 +28,8 @@ class CourseController extends AbstractController
     #[Route('/course', name: 'create_course')]
     public function createCourse(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
+
         // Create a new course
         $course = new Course();
         
@@ -66,6 +68,8 @@ class CourseController extends AbstractController
     #[Route('/course/edit/{id}', name: 'edit_course')]
     public function edit($id, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
+
         // Find the course by its ID
         $course = $this->courseRepository->find($id);
 
@@ -100,6 +104,8 @@ class CourseController extends AbstractController
     #[Route('/course/delete/{id}', methods:['GET', 'DELETE'], name: 'delete_course')]
     public function delete($id): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
+        
         $course = $this->courseRepository->find($id);
 
         // Check if the user is the instructor of the course, if not, don't grant delete permissions.

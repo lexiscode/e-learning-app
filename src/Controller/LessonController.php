@@ -31,6 +31,7 @@ class LessonController extends AbstractController
     #[Route('/lesson/{courseId}', name: 'create_lesson')]
     public function createLesson(Request $request, int $courseId): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
 
         // Get the course based on $courseId
         $course = $this->courseRepository->find($courseId);
@@ -74,6 +75,8 @@ class LessonController extends AbstractController
     #[Route('/lesson/edit/{id}', name: 'edit_lesson')]
     public function editLesson(Request $request, $id): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
+
         // Find the lesson by its ID
         $lesson = $this->lessonRepository->find($id);
 
@@ -104,6 +107,8 @@ class LessonController extends AbstractController
     #[Route('/lesson/delete/{id}', methods:['GET', 'DELETE'], name: 'delete_lesson')]
     public function delete($id): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
+        
         $lesson = $this->lessonRepository->find($id);
 
         // Get the courseId associated with the lesson

@@ -26,7 +26,7 @@ class ProfileController extends AbstractController
     #[Route('/users/all', name: 'app_all_users')]
     public function users(UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         
         $users = $userRepository->findAll();
         return $this->render('profile/all.html.twig', [

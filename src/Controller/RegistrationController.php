@@ -43,7 +43,15 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $user->setRoles(['ROLE_STUDENT']);
+            // Get the selected role value from the form
+            $selectedRole = $form->get('roles')->getData();
+
+            // Perform the checks and set roles accordingly
+            if ($selectedRole === [1]) {
+                $user->setRoles(['ROLE_INSTRUCTOR']);
+            } elseif ($selectedRole === [2]) {
+                $user->setRoles(['ROLE_STUDENT']);
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -58,12 +66,8 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
-            // return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_login');
+
         }
 
         return $this->render('registration/register.html.twig', [

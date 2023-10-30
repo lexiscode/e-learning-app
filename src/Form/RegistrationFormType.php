@@ -11,9 +11,9 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -25,14 +25,13 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Enter your username'],
             ]) 
             ->add('email')
-            ->add('guard', IntegerType::class, [
-                'label' => 'Select the role (instructor:1, student:2)',
-                'attr' => ['class' => 'form-control', 'placeholder' => 'Enter the guard value'],
-                'constraints' => [
-                    new Choice([
-                        'choices' => [1, 2], // Only allow 1 and 2 as valid choices
-                        'message' => 'Please select a valid guard value (1 or 2).',
-                    ]),
+            ->add('roles', ChoiceType::class, [
+                'label' => 'Select the role',
+                'attr' => ['class' => 'form-control'],
+                'multiple' => true, // Allow multiple choices
+                'choices' => [
+                    'Instructor' => 1, // '1' is the value for ROLE_INSTRUCTOR
+                    'Student' => 2,    // '2' is the value for ROLE_STUDENT
                 ],
             ])
             
