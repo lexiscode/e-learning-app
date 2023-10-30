@@ -38,9 +38,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100, unique: true)]
     private ?string $username = null;
 
-    #[ORM\Column]
-    private ?int $guard = null;
-
     #[ORM\OneToMany(mappedBy: 'instructor', targetEntity: Course::class)]
     private Collection $courses;
 
@@ -96,18 +93,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): static
     {
         $this->username = $username;
-
-        return $this;
-    }
-
-    public function getGuard(): ?int
-    {
-        return $this->guard;
-    }
-
-    public function setGuard(int $guard): static
-    {
-        $this->guard = $guard;
 
         return $this;
     }
