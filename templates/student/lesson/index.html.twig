@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Lessons{% endblock %}
+
+{% set include_navigation_bar = true %}
+
+{% block body %}
+
+    <p>{{ course.id }}</p>
+    <p>{{ course.title }}</p>
+    <p>{{ course.description }}</p>
+    <p>{{ course.price }}</p>
+    <br>
+
+    <div class="table-container w-50 m-auto">
+
+        <table class="table table-striped">
+            <thead style="text-align: center">
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody style="text-align: center">
+
+                {% if lessons|length > 0 %}
+                    {% for lesson in lessons %}
+                        <tr>
+                            <td>{{ lesson.id }}</td>
+                            <td>{{ lesson.title }}</td>
+                            <td>{{ lesson.content }}</td>
+                            <td>
+                                <a href="" class="btn btn-success">Completed</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <p>No lesson found.</p>
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock %}

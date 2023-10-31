@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Course;
 use DateTimeImmutable;
+use App\Entity\Enrollment;
 use App\Form\CourseFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,13 +17,15 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class CourseController extends AbstractController
 {
-    private $courseRepository;
     private $em;
+    private $courseRepository;
+    private $enrollmentRepository;
 
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
         $this->courseRepository = $em->getRepository(Course::class);
+        $this->enrollmentRepository = $em->getRepository(Enrollment::class);
     }
 
     #[Route('/course', name: 'create_course')]
@@ -121,5 +124,37 @@ class CourseController extends AbstractController
 
         return $this->redirectToRoute('create_course');
     }
+
+    // Students Pages Routes Below:
+
+    #[Route('/student/course', name: 'all_courses')]
+    public function allCourse(Request $request): Response
+    {
+        // Retrieve courses from the database
+        $courses = $this->courseRepository->findAll();
+
+        // Fetch the currently logged-in user
+        $user = $this->getUser();
+
+        return $this->render('student/course/index.html.twig', [
+            'courses' => $courses,
+            'user' => $user,
+        ]);
+    }
+
+
+    #[Route('/student/course/{courseId}', name: 'show_course')]
+    public function showCourse($courseId, Request $request): Response
+    {
+        // Find the course by its ID
+        $course = $this->courseRepository->find($courseId);
+
+        if (!$course){
+            throw $this->createNotFoundException('Course not found');
+        }
+
+        return $this->render('student/course/show.html.twig', ['course' => $course]);
+    }
+
 }
 

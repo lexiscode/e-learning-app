@@ -202,3 +202,4 @@ class Course
         return $this;
     }
 }
+

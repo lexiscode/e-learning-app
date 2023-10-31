@@ -119,5 +119,28 @@ class LessonController extends AbstractController
 
         return $this->redirectToRoute('create_lesson', ['courseId' => $courseId]);
     }
+
+
+    // Students Page Routes Below
+
+    #[Route('/student/lesson/{id}', name: 'course_lessons')]
+    public function showLessons(Request $request, int $id): Response
+    {
+        // Find the course by its ID
+        $course = $this->courseRepository->find($id);
+
+        if (!$course) {
+            throw $this->createNotFoundException('Course not found');
+        }
+
+        // Get the lessons associated with the course
+        $lessons = $course->getLessons();
+        //$lessons = $this->lessonRepository->findBy(['course' => $id]);
+
+        return $this->render('student/lesson/index.html.twig', [
+            'course' => $course,
+            'lessons' => $lessons,
+        ]);
+    }
 }
 

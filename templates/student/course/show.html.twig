@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Course Details{% endblock %}
+
+{% set include_navigation_bar = true %}
+
+{% block body %}
+
+    <p>{{ course.id }}</p>
+    <p>{{ course.title }}</p>
+    <p>{{ course.description }}</p>
+    <p>{{ course.price }}</p>
+    <br>
+
+    <a href="{{ path('all_courses') }}" class="btn btn-primary">Go Back</a>
+
+{% endblock %}
+
