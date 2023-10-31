@@ -22,6 +22,9 @@ class Enrollment
     #[ORM\Column(name: "course_id")]
     private ?int $courseId = null;
 
+    #[ORM\Column(name: "is_enrolled", type: 'boolean')]
+    private $isEnrolled = false;
+
     #[ORM\Column(name: "enrollment_date")]
     private ?\DateTimeImmutable $enrollmentDate = null;
 
@@ -37,6 +40,7 @@ class Enrollment
     public function __construct()
     {
         $this->progresses = new ArrayCollection();
+        $this->enrollmentDate = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -109,6 +113,16 @@ class Enrollment
         $this->course = $course;
 
         return $this;
+    }
+
+    public function getIsEnrolled(): bool
+    {
+        return $this->isEnrolled;
+    }
+
+    public function setIsEnrolled(bool $isEnrolled): void
+    {
+        $this->isEnrolled = $isEnrolled;
     }
 
     /**
