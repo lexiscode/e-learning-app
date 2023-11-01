@@ -18,9 +18,6 @@ class Lesson
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(name: "course_id")]
-    private ?int $courseId = null;
-
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
@@ -34,6 +31,7 @@ class Lesson
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'lessons', targetEntity: Course::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Course $course = null;
 
     #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: Progress::class)]
@@ -57,17 +55,6 @@ class Lesson
         return $this;
     }
 
-    public function getCourseId(): ?int
-    {
-        return $this->courseId;
-    }
-
-    public function setCourseId(int $courseId): static
-    {
-        $this->courseId = $courseId;
-
-        return $this;
-    }
 
     public function getTitle(): ?string
     {

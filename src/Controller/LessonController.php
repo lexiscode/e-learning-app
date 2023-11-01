@@ -145,7 +145,20 @@ class LessonController extends AbstractController
             'lessons' => $lessons,
         ]);
     }
+    
+    /*
+    #[Route('/student/lessons', name: 'course_lessons')]
+    public function showLessons(Request $request): Response
+    {
+        $lessons = $this->lessonRepository->findAll();
 
+        return $this->render('student/lesson/index.html.twig', [
+            'lessons' => $lessons
+        ]);
+    }
+    */
+
+    
     #[Route('/student/lesson/{id}', name: 'course_lesson')]
     public function showLesson(Request $request, int $id): Response
     {
@@ -168,6 +181,17 @@ class LessonController extends AbstractController
             'lesson' => $lesson,
         ]);
     }
+
+    /*
+    #[Route('/student/lesson/{id}', name: 'course_lesson')]
+    public function showLesson(Lesson $lesson, Course $course): Response
+    {
+        return $this->render('student/lesson/show.html.twig', [
+            'course' => $course,
+            'lesson' => $lesson,
+        ]);
+    }
+    */
    
 }
 

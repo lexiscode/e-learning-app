@@ -153,7 +153,8 @@ class Course
     public function addLesson(Lesson $lesson): static
     {
         if (!$this->lessons->contains($lesson)) {
-            $this->lessons[] = $lesson;
+            // $this->lessons[] = $lesson;
+            $this->lessons->add($lesson);
             $lesson->setCourse($this);
         }
 
