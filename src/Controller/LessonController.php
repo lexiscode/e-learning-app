@@ -123,7 +123,7 @@ class LessonController extends AbstractController
 
     // Students Page Routes Below
 
-    #[Route('/student/lesson/{id}', name: 'course_lessons')]
+    #[Route('/student/lessons/{id}', name: 'course_lessons')]
     public function showLessons(Request $request, int $id): Response
     {
         // Find the course by its ID
@@ -142,5 +142,29 @@ class LessonController extends AbstractController
             'lessons' => $lessons,
         ]);
     }
+
+    #[Route('/student/lesson/{id}', name: 'course_lesson')]
+    public function showLesson(Request $request, int $id): Response
+    {
+        // Find the course by its ID
+        $course = $this->courseRepository->find($id);
+
+        // Get the lesson  by its ID
+        $lesson = $this->lessonRepository->find($id);
+
+        if (!$course) {
+            throw $this->createNotFoundException('Course not found');
+        }
+
+        if (!$lesson) {
+            throw $this->createNotFoundException('Lesson not found');
+        }
+
+        return $this->render('student/lesson/show.html.twig', [
+            'course' => $course,
+            'lesson' => $lesson,
+        ]);
+    }
+   
 }
 

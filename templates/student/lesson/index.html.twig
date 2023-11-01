@@ -11,6 +11,8 @@
     <p>{{ course.description }}</p>
     <p>{{ course.price }}</p>
     <br>
+    <a href="{{ path('unenroll_course', {'id': course.id}) }}" class="btn btn-success">Unenroll</a>
+    <br>
 
     <div class="table-container w-50 m-auto">
 
@@ -33,7 +35,7 @@
                             <td>{{ lesson.title }}</td>
                             <td>{{ lesson.content }}</td>
                             <td>
-                                <a href="" class="btn btn-success">Completed</a>
+                                <a href="{{ path('course_lesson', {'id': lesson.id}) }}" class="btn btn-success">View</a>
                             </td>
                         </tr>
                     {% endfor %}

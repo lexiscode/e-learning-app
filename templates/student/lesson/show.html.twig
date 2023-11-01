@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Lessons{% endblock %}
+
+{% set include_navigation_bar = true %}
+
+{% block body %}
+
+
+    <h3>{{ course.title }}</h3>
+   
+    {{ lesson.id }}</td>
+    {{ lesson.title }}</td>
+    {{ lesson.content }}</td>
+    
+    <a href="{{ path('course_lessons', {'id': lesson.id}) }}" class="btn btn-success">Go Back</a>
+                            
+    </div>
+
+{% endblock %}

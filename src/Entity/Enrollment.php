@@ -16,12 +16,6 @@ class Enrollment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(name: "student_id")]
-    private ?int $studentId = null;
-
-    #[ORM\Column(name: "course_id")]
-    private ?int $courseId = null;
-
     #[ORM\Column(name: "is_enrolled", type: 'boolean')]
     private $isEnrolled = false;
 
@@ -51,30 +45,6 @@ class Enrollment
     public function setId(int $id): static
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    public function getStudentId(): ?int
-    {
-        return $this->studentId;
-    }
-
-    public function setStudentId(int $studentId): static
-    {
-        $this->studentId = $studentId;
-
-        return $this;
-    }
-
-    public function getCourseId(): ?int
-    {
-        return $this->courseId;
-    }
-
-    public function setCourseId(int $courseId): static
-    {
-        $this->courseId = $courseId;
 
         return $this;
     }

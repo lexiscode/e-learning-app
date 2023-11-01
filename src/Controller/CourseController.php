@@ -19,13 +19,11 @@ class CourseController extends AbstractController
 {
     private $em;
     private $courseRepository;
-    private $enrollmentRepository;
 
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
         $this->courseRepository = $em->getRepository(Course::class);
-        $this->enrollmentRepository = $em->getRepository(Enrollment::class);
     }
 
     #[Route('/course', name: 'create_course')]
