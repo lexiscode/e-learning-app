@@ -20,10 +20,10 @@ class Progress
     #[ORM\Column]
     private ?\DateTimeImmutable $lastAccessed = null;
 
-    #[ORM\ManyToOne(inversedBy: 'progresses')]
+    #[ORM\ManyToOne(inversedBy: 'progresses', targetEntity: Enrollment::class)]
     private ?Enrollment $enrollment = null;
 
-    #[ORM\ManyToOne(inversedBy: 'progresses')]
+    #[ORM\ManyToOne(inversedBy: 'progresses', targetEntity: Lesson::class)]
     private ?Lesson $lesson = null;
 
     public function getId(): ?int

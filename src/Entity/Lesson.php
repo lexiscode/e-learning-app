@@ -33,7 +33,7 @@ class Lesson
     #[ORM\Column(name: "updated_at")]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'lessons')]
+    #[ORM\ManyToOne(inversedBy: 'lessons', targetEntity: Course::class)]
     private ?Course $course = null;
 
     #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: Progress::class)]

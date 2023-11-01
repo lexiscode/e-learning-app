@@ -22,10 +22,10 @@ class Enrollment
     #[ORM\Column(name: "enrollment_date")]
     private ?\DateTimeImmutable $enrollmentDate = null;
 
-    #[ORM\ManyToOne(inversedBy: 'enrollments')]
+    #[ORM\ManyToOne(inversedBy: 'enrollments', targetEntity: User::class)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'enrollments')]
+    #[ORM\ManyToOne(inversedBy: 'enrollments', targetEntity: Course::class)]
     private ?Course $course = null;
 
     #[ORM\OneToMany(mappedBy: 'enrollment', targetEntity: Progress::class)]

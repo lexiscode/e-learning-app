@@ -67,27 +67,6 @@ class EnrollmentController extends AbstractController
         }
     }
 
-/*
-    #[Route('/student/course/unenroll/{id}', name: 'unenroll_course')]
-    public function unenrollCourse($id, Request $request): Response
-    {
-        // Fetch the course based on the 'id' parameter from the URL
-        $course = $this->courseRepository->find($id);
-
-        // Check if the user is enrolled in the course
-        $user = $this->getUser(); // Get the currently logged-in user
-        $enrollment = $this->enrollmentRepository->findOneBy(['user' => $user, 'course' => $course]);
-
-        if ($enrollment && $enrollment->getIsEnrolled()) {
-            // User is enrolled, so allow them to unenroll from the course
-            $enrollment->setIsEnrolled(false); // Set the enrollment status to false
-            $this->em->persist($enrollment);
-            $this->em->flush();
-        }
-
-        // Redirect to the all courses page or wherever you want
-        return $this->redirectToRoute('all_courses');
-    }*/
 
     #[Route('/student/course/unenroll/{id}', name: 'unenroll_course')]
     public function unenrollCourse($id, Request $request): Response

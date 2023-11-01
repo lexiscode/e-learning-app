@@ -42,7 +42,7 @@
                                 {% endif %}
                                
                                 {% if isEnrolled %}
-                                    <td><a href="{{ path('enroll_course', {'id': course.id}) }}" class="btn btn-success">Resume</a></td>
+                                    <td><a href="{{ path('resume_course', {'id': course.id}) }}" class="btn btn-success">Resume</a></td>
                                 {% else %}
                                     <td><a href="{{ path('enroll_course', {'id': course.id}) }}" class="btn btn-success">Enroll Now!</a></td>
                                 {% endif %}

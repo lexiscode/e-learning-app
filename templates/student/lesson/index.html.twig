@@ -12,10 +12,10 @@
     <p>{{ course.price }}</p>
     <br>
     <a href="{{ path('unenroll_course', {'id': course.id}) }}" class="btn btn-success">Unenroll</a>
+    <a href="{{ path('all_courses') }}" class="btn btn-success">Go Back</a>
     <br>
 
     <div class="table-container w-50 m-auto">
-
         <table class="table table-striped">
             <thead style="text-align: center">
                 <tr>
@@ -27,7 +27,6 @@
             </thead>
 
             <tbody style="text-align: center">
-
                 {% if lessons|length > 0 %}
                     {% for lesson in lessons %}
                         <tr>
@@ -36,17 +35,39 @@
                             <td>{{ lesson.content }}</td>
                             <td>
                                 <a href="{{ path('course_lesson', {'id': lesson.id}) }}" class="btn btn-success">View</a>
+                                
+                                {% for enrollment in app.user.enrollments %}
+                                    {% for progress in enrollment.progresses %}
+                                        {% if progress.status == 1 and lesson.id == progress.lesson.id %}
+                                            <button class="btn btn-secondary" disabled>Completed</button>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                
                             </td>
                         </tr>
                     {% endfor %}
                 {% else %}
                     <p>No lesson found.</p>
                 {% endif %}
-
             </tbody>
-
         </table>
-
     </div>
 
 {% endblock %}
+
+{#
+{% set isLessonCompleted = false %}
+{% if user is defined %}
+    {% for enrollment in user.enrollments %}
+        {% for progress in enrollment.progresses %}
+            {% if progress.lesson == lesson and progress.status == 1 %}
+                {% set isLessonCompleted = true %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+{% if isLessonCompleted %}
+    <button class="btn btn-secondary" disabled>Completed</button>
+{% endif %}
+#}
