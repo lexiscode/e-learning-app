@@ -2,6 +2,8 @@
 
 {% block title %}Hello {{ user.username }}!{% endblock %}
 
+{% set include_navigation_bar = true %}
+
 {% block body %}
     <div class="container">
         {{ form(form) }}
