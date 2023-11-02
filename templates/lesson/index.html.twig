@@ -26,12 +26,13 @@
                 <div class="form-group">
                     {{ form_row(lessonForm.title)}}
                 </div>
+                <br>
 
                 <div class="form-group">
                     {{ form_row(lessonForm.content, {
                         'label': 'Course Content',
                         'attr': {
-                                'class': 'form-control', 
+                                'class': 'ckeditor', 
                                 'placeholder': 'Enter course content here...'
                                 }
                         }) 
@@ -66,9 +67,10 @@
                         <tr>
                             <td>{{ lesson.id }}</td>
                             <td>{{ lesson.title }}</td>
-                            <td>{{ lesson.content }}</td>
+                            <td>{{ lesson.content|raw }}</td>
                             <td>
                                 {# Check if the course's instructor is the currently logged-in user #}
+                                <a href="{{ path('view_lesson', {'id': lesson.id}) }}" class="btn btn-secondary">View</a>
                                 <a href="{{ path('edit_lesson', {'id': lesson.id}) }}" class="btn btn-success">Update</a>
                                 <a href="/lesson/delete/{{ lesson.id }}" class="btn btn-danger">Delete</a>
                             </td>

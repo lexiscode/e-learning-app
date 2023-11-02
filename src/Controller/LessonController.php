@@ -72,6 +72,23 @@ class LessonController extends AbstractController
         ]);
     }
 
+    #[Route('/lesson/show/{id}', name: 'view_lesson')]
+    public function viewLesson(Request $request, $id): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
+
+        // Find the lesson by its ID
+        $lesson = $this->lessonRepository->find($id);
+
+        if (!$lesson){
+            throw $this->createNotFoundException('Lesson not found');
+        }
+       
+        return $this->render('lesson/show.html.twig', [
+            'lesson' => $lesson
+        ]);
+    }
+
     #[Route('/lesson/edit/{id}', name: 'edit_lesson')]
     public function editLesson(Request $request, $id): Response
     {

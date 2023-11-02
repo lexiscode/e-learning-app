@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Profile;
 use App\Entity\User;
-use App\Form\ProfileType;
+use App\Form\ProfileFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -42,7 +42,7 @@ class ProfileController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $form = $this->createForm(ProfileType::class, $profile);
+        $form = $this->createForm(ProfileFormType::class, $profile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -87,11 +87,13 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile/new', name: 'app_profile_new')]
-    public function new(Request $request, Profile $profile): Response
+    public function new(Request $request): Response
     {
+        $profile = new Profile();
+
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $form = $this->createForm(ProfileType::class, $profile);
+        $form = $this->createForm(ProfileFormType::class, $profile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
