@@ -147,11 +147,18 @@ class CourseController extends AbstractController
         // Find the course by its ID
         $course = $this->courseRepository->find($courseId);
 
+        // Get the lessons associated with the course through the relationship
+        $lessons = $course->getLessons();
+        //$lessons = $this->lessonRepository->findBy(['course' => $id]);
+
         if (!$course){
             throw $this->createNotFoundException('Course not found');
         }
 
-        return $this->render('student/course/show.html.twig', ['course' => $course]);
+        return $this->render('student/course/show.html.twig', [
+            'course' => $course,
+            'lessons' => $lessons
+        ]);
     }
 
 }

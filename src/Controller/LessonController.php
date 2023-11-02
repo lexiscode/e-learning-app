@@ -36,13 +36,15 @@ class LessonController extends AbstractController
         // Get the course based on $courseId
         $course = $this->courseRepository->find($courseId);
 
+        
         // Check if the user is the instructor of the course, if not, don't grant delete permissions.
         $user = $this->getUser();
         if ($course->getInstructor() !== $user) {
-            // Add a flash message and redirect to the main course page
+            # Add a flash message and redirect to the main course page
             $this->addFlash('danger', 'You are not authorized to create lessons for this course.');
             return $this->redirectToRoute('create_course');
         }
+        
 
         // Create a new course
         $lesson = new Lesson();
