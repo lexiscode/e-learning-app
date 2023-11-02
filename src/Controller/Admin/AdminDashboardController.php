@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\Course;
 use App\Entity\Lesson;
+use App\Entity\Profile;
 use App\Entity\Enrollment;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,6 +56,7 @@ class AdminDashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Course', 'fa fa-file-text', Course::class),
             MenuItem::linkToCrud('Lesson', 'fa fa-user', Lesson::class),
             MenuItem::linkToCrud('Enrollment', 'fa fa-user', Enrollment::class),
+            MenuItem::linkToCrud('Profile', 'fa fa-user', Profile::class),
 
         ];
        
