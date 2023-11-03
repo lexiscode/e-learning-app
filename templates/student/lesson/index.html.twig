@@ -34,13 +34,16 @@
                             <td>
                                 <a href="{{ path('course_lesson', {'id': lesson.id}) }}" class="btn btn-success">View</a>
                                 
-                                {% for enrollment in app.user.enrollments %}
-                                    {% for progress in enrollment.progresses %}
-                                        {% if progress.status == 1 and lesson.id == progress.lesson.id %}
-                                            <button class="btn btn-secondary" disabled>Completed</button>
-                                        {% endif %}
+                                {% if app.user is defined %}
+                                    {% for enrollment in app.user.enrollments %}
+                                        {% for progress in enrollment.progresses %}
+                                            {% if progress.status == 1 and lesson.id == progress.lesson.id %}
+                                                <button class="btn btn-secondary" disabled>Completed</button>
+                                            {% endif %}
+                                        {% endfor %}
                                     {% endfor %}
-                                {% endfor %}
+                                {% endif %}
+                                
                                 
                             </td>
                         </tr>

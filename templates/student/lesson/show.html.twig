@@ -9,30 +9,14 @@
 
     <h3>{{ course.title }}</h3>
    
-    {{ lesson.id }}</td>
-    {{ lesson.title }}</td>
-    {{ lesson.content }}</td>
+    <p>{{ lesson.id }}</p>
+    <p>{{ lesson.title }}</p>
+    
+    <p>{{ lesson.content|raw }}</p>
     
     <a href="{{ path('course_lessons', {'id': lesson.id}) }}" class="btn btn-success">Go Back</a>
 
-    {#}
-    {% if user is defined %}
-        {% for enrollment in user.enrollments %}
-        {% set isComplete = false %}
-            {% for progress in enrollment.progresses %}
-                {% if progress.status == 1 and lesson.id == progress.lessons.id %}
-                    {% set isComplete = true %}
-                {% endif %}
-            {% endfor %}
-            {% if not isComplete %}
-                <a href="{{ path('lesson_complete', {'id': lesson.id}) }}" class="btn btn-success">Complete</a>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    #}
 
-
-    
     {% set isComplete = false %}
     {% if user is defined %}
         {% for enrollment in user.enrollments %}
@@ -47,8 +31,29 @@
     {% if not isComplete %}
         <a href="{{ path('lesson_complete', {'id': lesson.id}) }}" class="btn btn-success">Complete</a>
     {% endif %}
-    
-                            
+
+                           
     </div>
 
 {% endblock %}
+
+{#
+
+{% if user is defined %}
+{% for enrollment in user.enrollments %}
+{% set isComplete = false %}
+    {% for progress in enrollment.progresses %}
+        {% if progress.status == 1 and lesson.id == progress.lesson.id %}
+            {% set isComplete = true %}
+        {% endif %}
+    {% endfor %}
+    {% if not isComplete %}
+        <a href="{{ path('lesson_complete', {'id': lesson.id}) }}" class="btn btn-success">Complete</a>
+    {% endif %}
+{% endfor %}
+{% endif %}
+
+#}
+
+  
+

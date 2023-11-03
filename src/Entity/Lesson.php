@@ -138,7 +138,7 @@ class Lesson
     {
         if ($this->progresses->removeElement($progress)) {
             // set the owning side to null (unless already changed)
-            if ($progress->getLessons() === $this) {
+            if ($progress->getLesson() === $this) {
                 $progress->setLessons(null);
             }
         }

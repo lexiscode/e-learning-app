@@ -74,7 +74,7 @@ class Progress
         return $this;
     }
 
-    public function getLessons(): ?Lesson
+    public function getLesson(): ?Lesson
     {
         return $this->lesson;
     }
