@@ -32,7 +32,9 @@
                             <td>{{ lesson.id }}</td>
                             <td>{{ lesson.title }}</td>
                             <td>
-                                <a href="{{ path('course_lesson', {'id': lesson.id}) }}" class="btn btn-success">View</a>
+                                
+                                <a href="{{ path('course_lesson', {'courseId': course.id, 'lessonId': lesson.id}) }}" 
+                                class="btn btn-success">View</a>
                                 
                                 {% if app.user is defined %}
                                     {% for enrollment in app.user.enrollments %}

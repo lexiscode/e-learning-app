@@ -156,9 +156,6 @@ class LessonController extends AbstractController
         $lessons = $course->getLessons();
         //$lessons = $this->lessonRepository->findBy(['course' => $id]);
 
-        //dd($course);
-        //dd($lessons);
-
         return $this->render('student/lesson/index.html.twig', [
             'course' => $course,
             'lessons' => $lessons,
@@ -166,18 +163,18 @@ class LessonController extends AbstractController
     }
 
     
-    #[Route('/student/lesson/{id}', name: 'course_lesson')]
-    public function showLesson(Request $request, int $id): Response
+    #[Route('/student/lesson/{courseId}/{lessonId}', name: 'course_lesson')]
+    public function showLesson(Request $request, int $courseId, int $lessonId): Response
     {
         // Find the course by its ID
-        $course = $this->courseRepository->find($id);
-
-        // Get the lesson  by its ID
-        $lesson = $this->lessonRepository->find($id);
+        $course = $this->courseRepository->find($courseId);
 
         if (!$course) {
             throw $this->createNotFoundException('Course not found');
         }
+
+        // Get the lesson by its ID associated with the course
+        $lesson = $this->lessonRepository->find($lessonId);
 
         if (!$lesson) {
             throw $this->createNotFoundException('Lesson not found');
@@ -188,6 +185,7 @@ class LessonController extends AbstractController
             'lesson' => $lesson,
         ]);
     }
+
    
 }
 
