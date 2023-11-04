@@ -185,7 +185,5 @@ class LessonController extends AbstractController
             'lesson' => $lesson,
         ]);
     }
-
    
 }
-

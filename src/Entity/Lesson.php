@@ -34,7 +34,7 @@ class Lesson
     #[ORM\JoinColumn(nullable: false)]
     private ?Course $course = null;
 
-    #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: Progress::class)]
+    #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: Progress::class, orphanRemoval: true, cascade: ["remove"])]
     private Collection $progresses;
 
     public function __construct()

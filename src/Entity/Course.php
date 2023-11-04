@@ -42,7 +42,7 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Lesson::class, orphanRemoval: true)]
     private Collection $lessons;
 
-    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Enrollment::class)]
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Enrollment::class, orphanRemoval: true, cascade: ["remove"])]
     private Collection $enrollments;
 
     public function __construct()

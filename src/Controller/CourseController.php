@@ -117,6 +117,13 @@ class CourseController extends AbstractController
             return $this->redirectToRoute('create_course');
         }
 
+        /*
+        $enrollments = $course->getEnrollments();
+        foreach ($enrollments as $enrollment) {
+            $this->em->remove($enrollment);
+        }
+        */
+
         $this->em->remove($course);
         $this->em->flush();
 
