@@ -164,7 +164,7 @@ class LessonController extends AbstractController
 
     
     #[Route('/student/lesson/{courseId}/{lessonId}', name: 'course_lesson')]
-    public function showLesson(Request $request, int $courseId, int $lessonId): Response
+    public function showLesson(Request $request, $courseId, $lessonId): Response
     {
         // Find the course by its ID
         $course = $this->courseRepository->find($courseId);

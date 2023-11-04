@@ -27,16 +27,16 @@ class ProgressController extends AbstractController
         $this->enrollmentRepository = $em->getRepository(Enrollment::class);
     }
     
-    #[Route('/student/lesson/complete/{id}', name: 'lesson_complete')]
-    public function completeCourse($id, Request $request): Response
+    #[Route('/student/lesson/complete/{courseId}/{lessonId}', name: 'lesson_complete')]
+    public function completeCourse($courseId, $lessonId, Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        // Fetch the lesson based on the 'id' parameter from the URL
-        $lesson = $this->lessonRepository->find($id);
+        // Fetch the lesson based on the 'lessonId' parameter from the URL
+        $lesson = $this->lessonRepository->find($lessonId);
 
-        // Fetch the course based on the 'id' parameter from the URL
-        $course = $this->courseRepository->find($id);
+        // Fetch the course based on the 'courseId' parameter from the URL
+        $course = $this->courseRepository->find($courseId);
 
         // Check if the user is already enrolled
         $user = $this->getUser(); // Get the currently logged-in user

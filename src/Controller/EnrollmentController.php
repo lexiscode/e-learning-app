@@ -79,7 +79,8 @@ class EnrollmentController extends AbstractController
 
         $enrollment = $this->enrollmentRepository->findOneBy(['user' => $user, 'course' => $course]);
 
-        /* Ensure that there are no associated progress records
+        /* 
+        //Ensure that there are no associated progress records
         $progressRecords = $enrollment->getProgresses();
         foreach ($progressRecords as $progress) {
             $this->em->remove($progress);

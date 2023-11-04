@@ -27,10 +27,9 @@
     {% endif %}
     
     {% if not isComplete %}
-        <a href="{{ path('lesson_complete', {'id': lesson.id}) }}" class="btn btn-success">Complete</a>
+        <a href="{{ path('lesson_complete', {'lessonId': lesson.id, 'courseId': course.id}) }}" class="btn btn-success">Complete</a>
     {% endif %}
 
-                           
     </div>
 
 {% endblock %}

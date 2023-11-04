@@ -118,10 +118,15 @@ class CourseController extends AbstractController
         }
 
         /*
+        // The code below is a "manual" way of deleting the foreign constraints of enrollment table data, from course table
+        // but this has been done indirectly already in Course entity by adding "orphanRemoval: true, cascade: ["remove"]"
+        // beside the $enrollments property
+
         $enrollments = $course->getEnrollments();
         foreach ($enrollments as $enrollment) {
             $this->em->remove($enrollment);
         }
+        
         */
 
         $this->em->remove($course);
