@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% set include_navigation_bar = true %}
+
+{% block body %}
+    <div class="container">
+        <h1>Something went wrong!</h1>
+        <p>
+            <a href="{{ path('app_home') }}">Return to the homepage</a>
+        </p>
+    </div>
+{% endblock %}

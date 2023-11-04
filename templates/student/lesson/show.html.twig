@@ -15,7 +15,6 @@
     
     <a href="{{ path('course_lessons', {'id': lesson.id}) }}" class="btn btn-success">Go Back</a>
 
-
     {% set isComplete = false %}
     {% if user is defined %}
         {% for enrollment in user.enrollments %}
