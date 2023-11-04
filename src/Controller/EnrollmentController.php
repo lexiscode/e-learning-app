@@ -80,7 +80,11 @@ class EnrollmentController extends AbstractController
         $enrollment = $this->enrollmentRepository->findOneBy(['user' => $user, 'course' => $course]);
 
         /* 
-        //Ensure that there are no associated progress records
+        //Ensure that there are no associated progress records//
+        // The code below is a "manual" way of deleting the foreign constraints of progress table data, from enrollment table
+        // but this has been done indirectly already in Enrollment entity by adding "orphanRemoval: true, cascade: ["remove"]"
+        // beside the $progresses property
+
         $progressRecords = $enrollment->getProgresses();
         foreach ($progressRecords as $progress) {
             $this->em->remove($progress);

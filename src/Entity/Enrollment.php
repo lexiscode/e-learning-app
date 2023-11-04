@@ -28,7 +28,7 @@ class Enrollment
     #[ORM\ManyToOne(inversedBy: 'enrollments', targetEntity: Course::class)]
     private ?Course $course = null;
 
-    #[ORM\OneToMany(mappedBy: 'enrollment', targetEntity: Progress::class)]
+    #[ORM\OneToMany(mappedBy: 'enrollment', targetEntity: Progress::class, orphanRemoval: true)]
     private Collection $progresses;
 
     public function __construct()
