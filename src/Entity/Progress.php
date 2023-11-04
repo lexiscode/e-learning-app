@@ -86,3 +86,4 @@ class Progress
         return $this;
     }
 }
+
