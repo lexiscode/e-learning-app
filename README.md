@@ -44,7 +44,7 @@ Welcome to the E-Learning Platform, an online learning platform where instructor
 - EasyAdmin Bundle for admin CRUD operations
 - Codeception acceptance tests for login, registration, adding courses, and deleting courses
 
-## XAMPP Test Installation SetUp
+## XAMPP Installation SetUp
 
 To run this project successfully, follow these installation instructions:
 
@@ -64,7 +64,7 @@ To run this project successfully, follow these installation instructions:
 14. Open the project in your web browser by running: `symfony open:local`
 
 
-To add these Docker installation instructions to your README in a clear and organized manner, you can create a new section for Docker setup and list the steps with descriptions. Here's how you can structure it:
+These below are for Docker installation instructions:
 
 ```markdown
 ## Docker Test Installation SetUp
