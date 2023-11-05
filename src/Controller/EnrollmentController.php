@@ -26,6 +26,8 @@ class EnrollmentController extends AbstractController
     #[Route('/student/course/enroll/{id}', name: 'enroll_course')]
     public function enrollCourse($id, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STUDENT');
+
         // Fetch the course based on the 'id' parameter from the URL
         $course = $this->courseRepository->find($id);
 
@@ -50,6 +52,8 @@ class EnrollmentController extends AbstractController
     #[Route('/student/course/resume/{id}', name: 'resume_course')]
     public function resumeCourse($id, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STUDENT');
+
         // Fetch the course based on the 'id' parameter from the URL
         $course = $this->courseRepository->find($id);
 
@@ -71,6 +75,8 @@ class EnrollmentController extends AbstractController
     #[Route('/student/course/unenroll/{id}', name: 'unenroll_course')]
     public function unenrollCourse($id, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STUDENT');
+        
         // Fetch the course based on the 'id' parameter from the URL
         $course = $this->courseRepository->find($id);
 

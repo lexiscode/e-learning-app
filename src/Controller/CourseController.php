@@ -140,6 +140,8 @@ class CourseController extends AbstractController
     #[Route('/student/course', name: 'all_courses')]
     public function allCourse(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STUDENT');
+
         // Retrieve courses from the database
         $courses = $this->courseRepository->findAll();
 
@@ -156,6 +158,8 @@ class CourseController extends AbstractController
     #[Route('/student/course/{courseId}', name: 'show_course')]
     public function showCourse($courseId, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STUDENT');
+
         // Find the course by its ID
         $course = $this->courseRepository->find($courseId);
 

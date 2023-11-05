@@ -145,6 +145,8 @@ class LessonController extends AbstractController
     #[Route('/student/lessons/{id}', name: 'course_lessons')]
     public function showLessons(Request $request, int $id): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STUDENT');
+
         // Find the course by its ID
         $course = $this->courseRepository->find($id);
 
@@ -166,6 +168,8 @@ class LessonController extends AbstractController
     #[Route('/student/lesson/{courseId}/{lessonId}', name: 'course_lesson')]
     public function showLesson(Request $request, $courseId, $lessonId): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STUDENT');
+        
         // Find the course by its ID
         $course = $this->courseRepository->find($courseId);
 

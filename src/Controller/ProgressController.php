@@ -56,3 +56,4 @@ class ProgressController extends AbstractController
     }
 
 }
+

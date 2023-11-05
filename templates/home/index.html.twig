@@ -6,7 +6,7 @@
 
 {% set include_navigation_bar = false %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}LearnLex{% endblock %}
 
 {% block body %}
 
@@ -15,8 +15,14 @@
     <h1>Welcome to LearnLex</h1>
     <p>Your all-in-one solution for code learning effectively.</p>
     <div class="buttons">
-        <a href="{{ path('app_login') }}" class="button">Login</a>
-        <a href="{{ path('app_register') }}" class="button">Register</a>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('app_profile') }}" class="button">My Profile</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="button">Login</a>
+            <a href="{{ path('app_register') }}" class="button">Register</a>
+        {% endif %}
+
     </div>
 
 </div>

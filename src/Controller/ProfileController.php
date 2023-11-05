@@ -89,6 +89,8 @@ class ProfileController extends AbstractController
     #[Route('/profile/new', name: 'app_profile_new')]
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $profile = new Profile();
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -131,3 +133,4 @@ class ProfileController extends AbstractController
         ]);
     }
 }
+
