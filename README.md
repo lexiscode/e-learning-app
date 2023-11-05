@@ -44,7 +44,7 @@ Welcome to the E-Learning Platform, an online learning platform where instructor
 - EasyAdmin Bundle for admin CRUD operations
 - Codeception acceptance tests for login, registration, adding courses, and deleting courses
 
-## Installation
+## XAMPP Test Installation SetUp
 
 To run this project successfully, follow these installation instructions:
 
@@ -62,6 +62,83 @@ To run this project successfully, follow these installation instructions:
 12. Clear cache files: `symfony console cache:clear`
 13. Start the local web server: `symfony server:start -d`
 14. Open the project in your web browser by running: `symfony open:local`
+
+
+To add these Docker installation instructions to your README in a clear and organized manner, you can create a new section for Docker setup and list the steps with descriptions. Here's how you can structure it:
+
+```markdown
+## Docker Test Installation SetUp
+
+If you prefer to use Docker for running the project, follow these steps:
+
+1. In your `.env.local` file, make the following changes:
+   - Comment out the XAMPP database URL.
+   - Uncomment the Docker database URL configuration.
+
+2. Run the following command to update Composer dependencies (if you've not done it before):
+
+   ```bash
+   composer update
+   ```
+
+3. Install npm for assets compilation (if you've not done it before):
+
+   ```bash
+   npm install
+   ```
+
+4. Compile assets using webpack (if you've not done it before):
+
+   ```bash
+   npm run dev
+   ```
+
+5. Ensure you have Docker Desktop installed and are logged in.
+
+6. Build the Docker image and start the containers using the following command:
+
+   ```bash
+   docker-compose up --build
+   ```
+
+7. Once the containers are built and running, open another terminal and navigate to the project directory.
+
+8. Get a bash shell inside the MariaDB container:
+
+   ```bash
+   docker exec -it <mariadb-container-id> bash
+   ```
+
+9. Inside the bash shell, log in to the MariaDB server:
+
+   ```bash
+   mariadb -u root -p
+   ```
+
+10. Enter "root" as the password when prompted to log in.
+
+11. Exit the bash shell and get a bash shell inside the FPM (PHP) container:
+
+    ```bash
+    docker exec -it <fpm-container-id> bash
+    ```
+
+12. (Optional) Confirm the existence of your database, either by logging in to phpMyAdmin or running this command (it should give you an error message saying "database exists"):
+
+    ```bash
+    php /application/bin/console doctrine:database:create
+    ```
+
+13. Run the migration to apply the database schema:
+
+    ```bash
+    php /application/bin/console doctrine:migrations:migrate
+    ```
+
+14. Access the project using the following URL:
+
+    [http://localhost:1001/](http://localhost:1001/)
+
 
 ## Getting Started
 
