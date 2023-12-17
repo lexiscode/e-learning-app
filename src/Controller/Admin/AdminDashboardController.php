@@ -56,7 +56,6 @@ class AdminDashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Course', 'fa fa-file-text', Course::class),
             MenuItem::linkToCrud('Lesson', 'fa fa-user', Lesson::class),
             MenuItem::linkToCrud('Enrollment', 'fa fa-user', Enrollment::class),
-            MenuItem::linkToCrud('Profile', 'fa fa-user', Profile::class),
 
         ];
        
