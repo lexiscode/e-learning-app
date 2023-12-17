@@ -6,24 +6,24 @@
 
 {% block body %}
 
-<!-- Header Start -->
-<div class="container-fluid bg-primary py-5 mb-5 page-header">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 text-center">
-                <h1 class="display-3 text-white animated slideInDown">All Courses</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">Courses</li>
-                    </ol>
-                </nav>
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary py-5 mb-5 page-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">All Courses</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Courses</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Header End -->
+    <!-- Header End -->
 
     <div class="container mt-4">
         <div class="row">
@@ -51,7 +51,8 @@
                         'label': 'Course Description',
                         'attr': {
                                 'class': 'form-control', 
-                                'placeholder': 'Enter course description here...'
+                                'placeholder': 'Enter course description here...',
+                                'rows': 4
                                 }
                         }) 
                     }}
@@ -77,12 +78,15 @@
     </div>
     <br>
 
-    <div class="table-container w-50 m-auto">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
+        <h1 class="mb-5">Your Courses</h1>
+    </div>
 
-        <table class="table table-striped">
+    <div class="table-container w-70 m-auto">
+        <table class="table table-striped" style="width: 100%">
             <thead style="text-align: center">
                 <tr>
-                    <th scope="col">#ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
                     <th scope="col">Price</th>
@@ -95,9 +99,8 @@
                 {% if courses|length > 0 %}
                     {% for course in courses %}
                         <tr>
-                            <td>{{ course.id }}</td>
                             <td>{{ course.title }}</td>
-                            <td>{{ course.description }}</td>
+                            <td>{{ course.description|slice(0, 80) }}...</td>
                             <td>{{ course.price }}</td>
                             <td>
                                 {# Check if the course's instructor is the currently logged-in user #}

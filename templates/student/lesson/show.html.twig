@@ -25,11 +25,11 @@
 </div>
 <!-- Header End -->
 
+<div style="max-width: 800px; margin: 0 auto;">
     <div style="text-align:center">
     <h3>{{ course.title }}</h3>
    
-    <p>{{ lesson.id }}</p>
-    <p>{{ lesson.title }}</p>
+    <p><b>{{ lesson.title }}</b></p>
     
     <p>{{ lesson.content|raw }}</p>
     
@@ -51,6 +51,7 @@
     {% endif %}
 
     </div>
+</div>
 
 {% endblock %}
 

@@ -25,42 +25,43 @@
 </div>
 <!-- Header End -->
 
-    <h2 class="text-center">Course Information</h2>
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 class="text-center">Course Information</h2>
 
-    <div class="text-center">
-        <p>{{ course.id }}</p>
-        <p>{{ course.title }}</p>
-        <p>{{ course.description }}</p>
-        <p>{{ course.price }}</p>
+        <div class="text-center">
+            <p>{{ course.title }}</p>
+            <p>{{ course.description }}</p>
+            <p>{{ course.price }}</p>
+        </div>
+
+        <h3 class="text-center">List of Lessons</h3>
+
+        <div class="table-container w-50 m-auto">
+            <table class="table table-striped">
+                <thead style="text-align: center">
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">Title</th>
+                    </tr>
+                </thead>
+
+                <tbody style="text-align: center">
+                    {% if lessons|length > 0 %}
+                        {% for lesson in lessons %}
+                            <tr>
+                                <td>{{ lesson.id }}</td>
+                                <td>{{ lesson.title }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <p>No lesson found.</p>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{{ path('all_courses') }}" class="btn btn-primary">Go Back</a>
     </div>
-
-    <h3 class="text-center">List of Lessons</h3>
-
-    <div class="table-container w-50 m-auto">
-        <table class="table table-striped">
-            <thead style="text-align: center">
-                <tr>
-                    <th scope="col">#ID</th>
-                    <th scope="col">Title</th>
-                </tr>
-            </thead>
-
-            <tbody style="text-align: center">
-                {% if lessons|length > 0 %}
-                    {% for lesson in lessons %}
-                        <tr>
-                            <td>{{ lesson.id }}</td>
-                            <td>{{ lesson.title }}</td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
-                    <p>No lesson found.</p>
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
-
-    <a href="{{ path('all_courses') }}" class="btn btn-primary">Go Back</a>
 
 {% endblock %}
 

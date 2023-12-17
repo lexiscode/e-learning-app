@@ -6,76 +6,86 @@
 
 {% block body %}
 
-<!-- Header Start -->
-<div class="container-fluid bg-primary py-5 mb-5 page-header">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 text-center">
-                <h1 class="display-3 text-white animated slideInDown">All Courses</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">All Courses</li>
-                    </ol>
-                </nav>
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary py-5 mb-5 page-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">All Courses</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">All Courses</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Header End -->
+    <!-- Header End -->
 
-    <div class="table-container w-50 m-auto">
-
-        <table class="table table-striped">
-            <thead style="text-align: center">
-                <tr>
-                    <th scope="col">#ID</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-
-            <tbody style="text-align: center">
+        <!-- Courses Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
+                    <h1 class="mb-5">Available Courses</h1>
+                </div>
 
                 {% if courses|length > 0 %}
                     {% for course in courses %}
-                        <tr>
-                            <td>{{ course.id }}</td>
-                            <td>{{ course.title }}</td>
-                            <td>{{ course.description }}</td>
-                            <td>{{ course.price }}</td>
-                            <td>
-                                <a href="{{ path('show_course', {'courseId': course.id}) }}" class="btn btn-primary">Course Details</a>
+                        <div class="row g-4 justify-content-center">
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="course-item bg-light">
+                                    <div class="position-relative overflow-hidden">
+                                        <img class="img-fluid" src="{{ asset('img/course-1.jpg') }}" alt="">
+                                        <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
 
-                                {% set isEnrolled = false %}
-                                {% if user is defined %}
-                                {# <pre> dump(user) </pre> #}
-                                    {% for enrollment in user.enrollments %}
-                                        {% if enrollment.course == course %}
-                                            {% set isEnrolled = true %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                               
-                                {% if isEnrolled %}
-                                    <td><a href="{{ path('resume_course', {'id': course.id}) }}" class="btn btn-success">Resume</a></td>
-                                {% else %}
-                                    <td><a href="{{ path('enroll_course', {'id': course.id}) }}" class="btn btn-success">Enroll Now!</a></td>
-                                {% endif %}
+                                            <a href="{{ path('show_course', {'courseId': course.id}) }}" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Course Details</a>
 
-                            </td>
-                        </tr>
+                                            {% set isEnrolled = false %}
+                                            {% if user is defined %}
+                                            {# <pre> dump(user) </pre> #}
+                                                {% for enrollment in user.enrollments %}
+                                                    {% if enrollment.course == course %}
+                                                        {% set isEnrolled = true %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            
+                                            {% if isEnrolled %}
+                                                <td><a href="{{ path('resume_course', {'id': course.id}) }}" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Resume</a></td>
+                                            {% else %}
+                                                <td><a href="{{ path('enroll_course', {'id': course.id}) }}" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now!</a></td>
+                                            {% endif %}
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="text-center p-4 pb-0">
+                                        <h3 class="mb-0">${{ course.price }}</h3>
+                                        <div class="mb-3">
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small class="fa fa-star text-primary"></small>
+                                            <small>(123)</small>
+                                        </div>
+                                        <h5 class="mb-4">{{ course.title }}</h5>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
                     {% endfor %}
                 {% else %}
                     <p>No courses found.</p>
                 {% endif %}
 
-            </tbody>
-
-        </table>
+            </div>
+        </div>
+        <!-- Courses End -->
 
     </div>
 
